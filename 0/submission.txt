@@ -14,11 +14,6 @@ func bracketCheck(teks string) bool {
 			brackets = append(brackets, x)
 		}
 		if x == ")" || x == "]" || x == "}" {
-			// cek bracket buka
-			pass := cekBracketBuka(brackets, x)
-			if !pass {
-				return false
-			}
 			brackets = append(brackets, x)
 		}
 	}
@@ -53,36 +48,6 @@ func bracketCheck(teks string) bool {
 	return true
 }
 
-func cekBracketBuka(arr []string, value string) bool {
-	if len(arr) == 0 {
-		return false
-	}
-	switch value {
-	case "}":
-		for _, val := range arr {
-			if val == "{" {
-				return true
-
-			}
-		}
-	case ")":
-		for _, val := range arr {
-			if val == "(" {
-				return true
-
-			}
-		}
-	case "]":
-		for _, val := range arr {
-			if val == "[" {
-				return true
-
-			}
-		}
-	}
-	return false
-}
-
 func reoccurenceCheck(array []string) string {
 	arr1 := strings.Split(array[0], ", ")
 	arr2 := strings.Split(array[1], ", ")
@@ -91,7 +56,6 @@ func reoccurenceCheck(array []string) string {
 		for _, str := range arr2 {
 			if val == str {
 				arr3 = append(arr3, val)
-				break
 			}
 		}
 	}
@@ -110,35 +74,8 @@ func main() {
 	fmt.Println(bracketCheck("{}({}"))                           //false
 	fmt.Println(bracketCheck("(hello {world}) [(test) {case}]")) //true
 	fmt.Println(bracketCheck("(hello {world)"))                  //false
-	fmt.Println(bracketCheck("(hello} {world)"))
 	fmt.Println("Nomor 2")
 	fmt.Println(reoccurenceCheck([]string{"1, 3, 4, 7, 13", "1, 2, 4, 13, 15"}))
 	fmt.Println(reoccurenceCheck([]string{"1, 3, 4, 7, 13", "2, 5, 11, 15"}))
-	fmt.Println("Nomor Bonus")
-	fmt.Println(cekPalindrome("katak"))   //true
-	fmt.Println(cekPalindrome("jakarta")) //false
-	fmt.Println(cekPalindrome("abccba"))  //true
 
-}
-func cekPalindrome(kata string) bool {
-	var eja []string
-	for _, val := range kata {
-		x := fmt.Sprintf("%c", val)
-		eja = append(eja, x)
-	}
-	var balik []string
-	y := len(eja)
-	y--
-
-	for i := y; i >= 0; i-- {
-		balik = append(balik, eja[i])
-
-	}
-	terbalik := strings.Join(balik, "")
-	ok := strings.Compare(terbalik, kata)
-
-	if ok == 0 {
-		return true
-	}
-	return false
 }
